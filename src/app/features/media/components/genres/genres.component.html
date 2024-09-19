@@ -1,0 +1,53 @@
+<div class="container py-4">
+  <div class="mb-4 grid grid-cols-1">
+    <div class="mb-4">
+      <a role="button" aria-hidden="true" [ngClass]="{ active: isActiveMovies }" (click)="toggleActive('movie')"
+        class="media-buttons">Movies</a>
+      <a role="button" aria-hidden="true" [ngClass]="{ active: isActiveTvshows }" (click)="toggleActive('tv')"
+        class="media-buttons">TV Shows</a>
+    </div>
+
+    <!-- List genres -->
+    <ng-container *ngIf="genres$ | async as genres; else loadingGenres">
+      <div class="grid-cols-12">
+        <a *ngFor="let genre of genres" [routerLink]="'/genres/' + genre.id" role="button" aria-hidden="true"
+          class="genres-links">{{ genre.name }}</a>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Show items -->
+  <ng-container *ngIf="media$ | async as media; else loadingMediaItem">
+    <div class="mb-4 grid grid-cols-5 gap-4">
+      <div *ngFor="let mediaItem of media.results">
+        <app-media-item [mediaItem]="mediaItem"></app-media-item>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Paginator -->
+  <div class="grid grid-cols-1">
+    <div>
+      <app-paginator [media$]="media$" [genreId]="genreId" [mediaType]="mediaType"
+        (pageEmitter)="onPageChange($event)"></app-paginator>
+    </div>
+  </div>
+</div>
+
+<!-- loadingGenres -->
+<ng-template #loadingGenres>
+  <div class="mb-8 flex gap-2">
+    <ng-container *ngFor="let _ of genresCount">
+      <p-skeleton width="5rem" height="2rem" />
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- loading media items -->
+<ng-template #loadingMediaItem>
+  <div class="container grid grid-cols-5 gap-4">
+    <ng-container *ngFor="let _ of mediaItemCount">
+      <p-skeleton width="" height="20rem" />
+    </ng-container>
+  </div>
+</ng-template>

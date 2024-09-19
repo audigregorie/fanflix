@@ -1,0 +1,183 @@
+<ng-container *ngIf="media$ | async as media; else loadingTabView">
+  <!-- Brackets around media comes from typescript to pass in one object to a variable expecting an array of objects -->
+  <app-slider [slides]="[media]" [isHeader]="true"></app-slider>
+
+  <!-- Tabs container -->
+  <p-tabView>
+    <!-- Overview tab panel -->
+    <p-tabPanel header="Overview">
+      <div class="container flex gap-4">
+        <div>
+          <img [src]="imagesSizes.medium + media.poster_path" alt="" class="max-w-full" />
+        </div>
+        <div class="">
+          <h2 class="label mb-2">Overview</h2>
+          <p class="mb-6">{{ media.overview }}</p>
+
+          <!-- Release date -->
+          <div class="stat">
+            <div class="label">Release Date</div>
+            <div class="value">
+              {{ media.release_date | date: 'dd.MM.yyyy' }}
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="stat">
+            <div class="label">Language</div>
+            <div class="value">
+              {{ media.original_language }}
+            </div>
+          </div>
+
+          <!-- Revenue -->
+          <div class="stat">
+            <div class="label">Revenue</div>
+            <div class="value">
+              {{ media.revenue | currency }}
+            </div>
+          </div>
+
+          <!-- Duration -->
+          <div class="stat">
+            <div class="label">Duration</div>
+            <div class="value">{{ media.runtime }} min</div>
+          </div>
+
+          <!-- Status -->
+          <div class="stat">
+            <div class="label">Status</div>
+            <div class="value">
+              {{ media.status }}
+            </div>
+          </div>
+
+          <!-- Genres -->
+          <div class="stat">
+            <div class="label">Genres</div>
+            <div class="value">
+              <span>{{ media.genres | addSpace }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cast carousel -->
+      <ng-container *ngIf="mediaCast$ | async as actors">
+        <div class="container">
+          <h2 class="mb-4 text-3xl">Cast</h2>
+          <p-carousel [value]="actors" [numVisible]="5" [numScroll]="3" [circular]="false">
+            <ng-template let-actor pTemplate="item">
+              <div class="flex h-full flex-col gap-2 p-4">
+                <img *ngIf="actor.profile_path; else defaultActorPhoto" [src]="imagesSizes.medium + actor.profile_path"
+                  alt="" class="w-full" />
+                <div class="flex flex-col items-center">
+                  <p>{{ actor.character }}</p>
+                  <p>{{ actor.name }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+
+    <!-- Videos tab panel -->
+    <p-tabPanel header="Videos">
+      <!-- Media videos -->
+      <ng-container *ngIf="mediaVideos$ | async as mediaVideos; else loadingVideos">
+        <div class="grid grid-cols-3 gap-4">
+          <div *ngFor="let mediaVideo of mediaVideos">
+            <app-video-embed [key]="mediaVideo.key"></app-video-embed>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+
+    <!-- Photos tab panel -->
+    <p-tabPanel header="Photos">
+      <!-- Media images -->
+      <ng-container *ngIf="mediaImages$ | async as mediaImages; else loadingPhotos">
+        <div class="grid grid-cols-4 gap-4">
+          <div *ngFor="let mediaImage of mediaImages">
+            <p-image [src]="imagesSizes.large + mediaImage.file_path" [alt]="media.title" width="100%"
+              [preview]="true"></p-image>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+  </p-tabView>
+</ng-container>
+
+<!-- Similar shows -->
+<ng-container *ngIf="mediaSimilarShows$ | async as mediaSimilarShows; else loadingMedia">
+  <app-banner [title]="'Similar Shows'" [media]="mediaSimilarShows"></app-banner>
+</ng-container>
+
+<!-- Else template if no actor photo -->
+<ng-template #defaultActorPhoto>
+  <img class="h-[91%] object-cover" src="../../../../../assets/no-picture.jpg" alt="No Picture" />
+</ng-template>
+
+<!-- Skeletons during loading -->
+<!-- Loading slider and all tab options -->
+<ng-template #loadingTabView>
+  <p-skeleton width="" height="35rem" styleClass="mb-4" />
+  <div class="container mb-4 flex flex-col gap-4">
+    <div class="flex justify-center gap-4">
+      <p-skeleton width="7rem" height="3rem" />
+      <p-skeleton width="7rem" height="3rem" />
+      <p-skeleton width="7rem" height="3rem" />
+    </div>
+  </div>
+  <!-- Loading overview -->
+  <div class="container mb-4 flex gap-4">
+    <p-skeleton width="18rem" height="25rem" />
+    <div class="flex flex-col gap-4">
+      <ng-container *ngFor="let _ of overviewSkeletonCount">
+        <p-skeleton width="20rem" height="1rem" />
+      </ng-container>
+    </div>
+  </div>
+  <!-- Loading cast -->
+  <div class="container mb-4">
+    <h2 class="text-3xl">Cast</h2>
+    <div class="flex justify-center gap-4">
+      <ng-container *ngFor="let _ of castSkeletonCount">
+        <div class="flex flex-col items-center">
+          <p-skeleton width="16rem" height="22rem" styleClass="mb-4" />
+          <p-skeleton width="4rem" height="1rem" styleClass="mb-2" />
+          <p-skeleton width="4rem" height="1rem" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Loading similar movies -->
+<ng-template #loadingMedia>
+  <h2 class="container mb-4 text-3xl">Similar Shows</h2>
+  <div class="container grid grid-cols-4 gap-4">
+    <ng-container *ngFor="let _ of mediaSkeletonCount">
+      <p-skeleton width="" height="25rem" />
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- Loading videos -->
+<ng-template #loadingVideos>
+  <div class="container grid grid-cols-3 gap-4">
+    <ng-container *ngFor="let _ of videoSkeletonCount">
+      <p-skeleton width="" height="20rem" />
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- Loading photos -->
+<ng-template #loadingPhotos>
+  <div class="container grid grid-cols-4 gap-4">
+    <ng-container *ngFor="let _ of photoSkeletonCount">
+      <p-skeleton width="" height="20rem" />
+    </ng-container>
+  </div>
+</ng-template>

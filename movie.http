@@ -1,0 +1,3 @@
+### Get User Information
+GET https://jsonplaceholder.typicode.com/users/1
+Content-Type: application/json

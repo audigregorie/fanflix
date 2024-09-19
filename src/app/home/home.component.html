@@ -1,0 +1,51 @@
+<!-- Popular movies -->
+<ng-container *ngIf="popularMovies$ | async as popularMovies; else loadingPopularMovies">
+  <app-slider [slides]="popularMovies"></app-slider>
+</ng-container>
+
+<!-- Upcoming movies -->
+<ng-container *ngIf="upcomingMovies$ | async as upcomingMovies; else loadingUpComingMovies">
+  <app-banner [title]="'Upcoming Movies'" [media]="upcomingMovies" [mediaType]="'movie'"></app-banner>
+</ng-container>
+
+<!-- Top rated movies -->
+<ng-container *ngIf="topRatedMovies$ | async as topRatedMovies; else loadingTopRatedMovies">
+  <app-banner [title]="'Top Rated Movies'" [media]="topRatedMovies" [mediaType]="'movie'"></app-banner>
+</ng-container>
+
+<!-- Popular tvshows -->
+<ng-container *ngIf="popularTvshows$ | async as popularTvshows; else loadingPopularTvshows">
+  <app-banner [title]="'Popular Tv Shows'" [media]="popularTvshows" [mediaType]="'tv'"></app-banner>
+</ng-container>
+
+<!-- Skeletons during loading -->
+<ng-template #loadingPopularMovies>
+  <p-skeleton width="" height="35rem" styleClass="mb-4" />
+</ng-template>
+
+<ng-template #loadingUpComingMovies>
+  <h2 class="container mb-4 text-3xl">Upcoming Movies</h2>
+  <div class="container mb-4 grid grid-cols-4 gap-4">
+    <ng-container *ngFor="let _ of mediaSkeletonCount">
+      <p-skeleton width="" height="25rem" />
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #loadingTopRatedMovies>
+  <h2 class="container mb-4 text-3xl">Top Rated Movies</h2>
+  <div class="container mb-4 grid grid-cols-4 gap-4">
+    <ng-container *ngFor="let _ of mediaSkeletonCount">
+      <p-skeleton width="" height="25rem" />
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #loadingPopularTvshows>
+  <h2 class="container mb-4 text-3xl">Popular Tv Shows</h2>
+  <div class="container mb-4 grid grid-cols-4 gap-4">
+    <ng-container *ngFor="let _ of mediaSkeletonCount">
+      <p-skeleton width="" height="25rem" />
+    </ng-container>
+  </div>
+</ng-template>

@@ -1,0 +1,28 @@
+@import '../../../../../styles/_colors.scss';
+
+.genres-links {
+  padding: 5px;
+  background-color: $primary-color;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.media-buttons {
+  padding: 5px;
+  background-color: $primary-color;
+  opacity: 0.5;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.active {
+  opacity: 1;
+}

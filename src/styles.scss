@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+@import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/md-dark-indigo/theme.css';
+@import 'primeng/resources/primeng.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#141414] font-['Roboto'] font-sans text-sm font-normal;
+}
+
+a {
+  @apply cursor-pointer no-underline hover:opacity-80;
+}
+
+.debug {
+  @apply border border-red-500;
+}
+
+.container {
+  @apply mx-20;
+}
