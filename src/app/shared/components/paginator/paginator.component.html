@@ -1,3 +1,5 @@
 <ng-container *ngIf="media$ | async as media">
-  <p-paginator (onPageChange)="pageChanged($event)" [rows]="20" [totalRecords]="media.total_results"></p-paginator>
+  <p-paginator (onPageChange)="pageChanged($event)" [rows]="20" [totalRecords]="media.total_results"
+    [ngClass]="{ 'custom-paginator': true }" [first]="(currentPage - 1) * 20">
+  </p-paginator>
 </ng-container>

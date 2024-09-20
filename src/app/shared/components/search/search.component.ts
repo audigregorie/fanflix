@@ -1,21 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core'
-import { FormControl, ReactiveFormsModule } from '@angular/forms'
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.scss',
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  @Output() public searchEmitter = new EventEmitter<string>()
+  @Output() public searchEmitter = new EventEmitter<string>();
 
-  public searchControl: FormControl = new FormControl('')
+  public searchControl: FormControl = new FormControl('');
 
-  public onSearch() {
-    const searchTerm = this.searchControl.value
-    this.searchEmitter.emit(searchTerm)
-    console.log(searchTerm)
+  public onSearch(): void {
+    const searchTerm = this.searchControl.value;
+    this.searchEmitter.emit(searchTerm);
   }
 }

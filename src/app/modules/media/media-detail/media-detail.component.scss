@@ -1,4 +1,4 @@
-@import '../../../../../styles/_colors.scss';
+@import '../../../../styles/colors';
 
 ::ng-deep {
   .p-tabview .p-tabview-nav {
@@ -17,7 +17,6 @@
 .stat {
   display: flex;
   margin-bottom: 15px;
-
 }
 
 .label {

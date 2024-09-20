@@ -1,8 +1,7 @@
 <ng-container *ngIf="media$ | async as media; else loadingTabView">
-  <!-- Brackets around media comes from typescript to pass in one object to a variable expecting an array of objects -->
+  <!-- Brackets around media in order to  pass an object to a variable that is expecting an array -->
   <app-slider [slides]="[media]" [isHeader]="true"></app-slider>
 
-  <!-- Tabs container -->
   <p-tabView>
     <!-- Overview tab panel -->
     <p-tabPanel header="Overview">
@@ -15,45 +14,39 @@
           <p class="mb-6">{{ media.overview }}</p>
 
           <!-- Release date -->
-          <div class="stat">
+          <div class="stat" *ngIf="media.release_date || media.first_air_date">
             <div class="label">Release Date</div>
             <div class="value">
-              {{ media.release_date | date: 'dd.MM.yyyy' }}
+              {{ media.release_date || media.first_air_date | date: 'dd.MM.yyyy' }}
             </div>
           </div>
 
           <!-- Language -->
-          <div class="stat">
+          <div class="stat" *ngIf="media.original_language">
             <div class="label">Language</div>
-            <div class="value">
-              {{ media.original_language }}
-            </div>
+            <div class="value">{{ media.original_language }}</div>
           </div>
 
-          <!-- Revenue -->
-          <div class="stat">
+          <!-- Revenue  -->
+          <div class="stat" *ngIf="media.revenue">
             <div class="label">Revenue</div>
-            <div class="value">
-              {{ media.revenue | currency }}
-            </div>
+            <div class="value">{{ media.revenue | currency }}</div>
           </div>
 
-          <!-- Duration -->
-          <div class="stat">
+          <!-- Duration  -->
+          <div class="stat" *ngIf="media.runtime">
             <div class="label">Duration</div>
             <div class="value">{{ media.runtime }} min</div>
           </div>
 
           <!-- Status -->
-          <div class="stat">
+          <div class="stat" *ngIf="media.status">
             <div class="label">Status</div>
-            <div class="value">
-              {{ media.status }}
-            </div>
+            <div class="value">{{ media.status }}</div>
           </div>
 
           <!-- Genres -->
-          <div class="stat">
+          <div class="stat" *ngIf="media.genres">
             <div class="label">Genres</div>
             <div class="value">
               <span>{{ media.genres | addSpace }}</span>
@@ -69,8 +62,7 @@
           <p-carousel [value]="actors" [numVisible]="5" [numScroll]="3" [circular]="false">
             <ng-template let-actor pTemplate="item">
               <div class="flex h-full flex-col gap-2 p-4">
-                <img *ngIf="actor.profile_path; else defaultActorPhoto" [src]="imagesSizes.medium + actor.profile_path"
-                  alt="" class="w-full" />
+                <img *ngIf="actor.profile_path; else defaultActorPhoto" [src]="imagesSizes.medium + actor.profile_path" alt="" class="w-full" />
                 <div class="flex flex-col items-center">
                   <p>{{ actor.character }}</p>
                   <p>{{ actor.name }}</p>
@@ -84,7 +76,6 @@
 
     <!-- Videos tab panel -->
     <p-tabPanel header="Videos">
-      <!-- Media videos -->
       <ng-container *ngIf="mediaVideos$ | async as mediaVideos; else loadingVideos">
         <div class="grid grid-cols-3 gap-4">
           <div *ngFor="let mediaVideo of mediaVideos">
@@ -96,12 +87,10 @@
 
     <!-- Photos tab panel -->
     <p-tabPanel header="Photos">
-      <!-- Media images -->
       <ng-container *ngIf="mediaImages$ | async as mediaImages; else loadingPhotos">
         <div class="grid grid-cols-4 gap-4">
           <div *ngFor="let mediaImage of mediaImages">
-            <p-image [src]="imagesSizes.large + mediaImage.file_path" [alt]="media.title" width="100%"
-              [preview]="true"></p-image>
+            <p-image [src]="imagesSizes.large + mediaImage.file_path" [alt]="media.title || media.name" width="100%" [preview]="true"></p-image>
           </div>
         </div>
       </ng-container>

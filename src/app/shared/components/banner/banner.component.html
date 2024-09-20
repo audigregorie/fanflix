@@ -1,10 +1,11 @@
-<div class="container py-4" *ngIf="media">
-  <h1 class="mb-4 text-3xl">{{ title }}</h1>
+<ng-container *ngIf="media">
+  <div class="container py-4">
+    <h1 class="mb-4 text-3xl">{{ title }}</h1>
 
-  <!-- List media -->
-  <div class="grid grid-cols-5 gap-4">
-    <div class="col-span-1" *ngFor="let mediaItem of media">
-      <app-media-item [mediaItem]="mediaItem" [mediaType]="mediaType"></app-media-item>
+    <div class="grid grid-cols-5 gap-4">
+      <ng-container *ngFor="let mediaItem of media">
+        <app-media-item [mediaItem]="mediaItem" [mediaType]="mediaType" class="col-span-1"></app-media-item>
+      </ng-container>
     </div>
   </div>
-</div>
+</ng-container>

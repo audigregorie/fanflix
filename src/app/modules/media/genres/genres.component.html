@@ -34,20 +34,20 @@
   </div>
 </div>
 
-<!-- loadingGenres -->
+<!-- Loading genres -->
 <ng-template #loadingGenres>
   <div class="mb-8 flex gap-2">
     <ng-container *ngFor="let _ of genresCount">
-      <p-skeleton width="5rem" height="2rem" />
+      <p-skeleton width="5rem" height="2rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>
 
-<!-- loading media items -->
+<!-- Loading media items -->
 <ng-template #loadingMediaItem>
   <div class="container grid grid-cols-5 gap-4">
     <ng-container *ngFor="let _ of mediaItemCount">
-      <p-skeleton width="" height="20rem" />
+      <p-skeleton width="" height="20rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>

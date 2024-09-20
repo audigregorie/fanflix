@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core'
-import { Genre } from '../types/movie.type'
+import { Pipe, PipeTransform } from '@angular/core';
+import { Genre } from '../types/media-item.type';
 
 @Pipe({
   name: 'addSpace',
@@ -8,8 +8,8 @@ import { Genre } from '../types/movie.type'
 export class AddSpacePipe implements PipeTransform {
   transform(genres: Genre[] | undefined): string {
     if (!genres || genres.length === 0) {
-      return ''
+      return '';
     }
-    return genres.map((genre) => genre.name).join(' ')
+    return genres.map((genre) => genre.name).join(' ');
   }
 }

@@ -5,7 +5,6 @@
     </div>
   </div>
 
-  <!-- List media -->
   <ng-container *ngIf="media$ | async as media; else loadingMediaItem">
     <div class="mb-4 grid grid-cols-5 gap-4">
       <div *ngFor="let mediaItem of media.results">
@@ -13,7 +12,6 @@
       </div>
     </div>
 
-    <!-- Paginator -->
     <div class="grid grid-cols-1">
       <div>
         <p-paginator (onPageChange)="pageChanged($event)" [rows]="20" [totalRecords]="media.total_results"></p-paginator>
@@ -22,11 +20,10 @@
   </ng-container>
 </div>
 
-<!-- loading media items -->
 <ng-template #loadingMediaItem>
   <div class="container grid grid-cols-5 gap-4">
     <ng-container *ngFor="let _ of mediaItemCount">
-      <p-skeleton width="" height="20rem" />
+      <p-skeleton width="" height="20rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>

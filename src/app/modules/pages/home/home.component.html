@@ -20,14 +20,14 @@
 
 <!-- Skeletons during loading -->
 <ng-template #loadingPopularMovies>
-  <p-skeleton width="" height="35rem" styleClass="mb-4" />
+  <p-skeleton width="" height="35rem" styleClass="mb-4"></p-skeleton>
 </ng-template>
 
 <ng-template #loadingUpComingMovies>
   <h2 class="container mb-4 text-3xl">Upcoming Movies</h2>
   <div class="container mb-4 grid grid-cols-4 gap-4">
     <ng-container *ngFor="let _ of mediaSkeletonCount">
-      <p-skeleton width="" height="25rem" />
+      <p-skeleton width="" height="25rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>
@@ -36,7 +36,7 @@
   <h2 class="container mb-4 text-3xl">Top Rated Movies</h2>
   <div class="container mb-4 grid grid-cols-4 gap-4">
     <ng-container *ngFor="let _ of mediaSkeletonCount">
-      <p-skeleton width="" height="25rem" />
+      <p-skeleton width="" height="25rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>
@@ -45,7 +45,7 @@
   <h2 class="container mb-4 text-3xl">Popular Tv Shows</h2>
   <div class="container mb-4 grid grid-cols-4 gap-4">
     <ng-container *ngFor="let _ of mediaSkeletonCount">
-      <p-skeleton width="" height="25rem" />
+      <p-skeleton width="" height="25rem"></p-skeleton>
     </ng-container>
   </div>
 </ng-template>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="mediaItem">
+  <a [routerLink]="'/detail/' + mediaItem.id + '/' + mediaType" class="relative block h-[425px] rounded-md border border-[#999]">
+    <div class="absolute left-3 top-3 flex items-center rounded-md bg-black px-2 py-1">
+      <i class="pi pi-star"></i>
+      <span>{{ mediaItem.vote_average }}/10</span>
+    </div>
+
+    <div class="h-[375px]">
+      <img
+        [src]="imagesBaseUrl + '/w500/' + mediaItem.poster_path"
+        [alt]="mediaItem.title || mediaItem.name"
+        class="h-[375px] w-full rounded-md object-cover" />
+    </div>
+
+    <div class="flex h-12 items-center rounded-b-md rounded-r-md bg-black px-2 font-bold">
+      {{ mediaItem.original_title || mediaItem.original_name }}
+    </div>
+  </a>
+</ng-container>

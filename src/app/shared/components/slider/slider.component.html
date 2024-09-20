@@ -1,35 +1,37 @@
-<div *ngIf="slides" class="relative h-[35rem] border border-blue-300">
-  <ng-container *ngFor="let movie of slides; let movieIndex = index">
-    <div *ngIf="movieIndex === slideIndex" @slideFade>
-      <!-- image -->
-      <div class="slide relative h-[35rem]">
-        <img [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path" [alt]="movie.title" class="h-full w-full object-cover" />
-      </div>
+<ng-container *ngIf="slides">
+  <div class="relative h-[35rem]">
+    <ng-container *ngFor="let mediaItem of slides; let mediaIndex = index">
+      <ng-container *ngIf="mediaIndex === slideIndex">
+        <div @slideFade>
+          <div class="slide relative h-[35rem]">
+            <img [src]="imagesBaseUrl + 'w1280' + mediaItem.backdrop_path" [alt]="mediaItem.title || mediaItem.name" class="h-full w-full object-cover" />
+          </div>
 
-      <!-- movie data -->
-      <div class="absolute left-20 top-20 text-white">
-        <h2 class="text-4xl">{{ movie.original_title }}</h2>
-        <div class="mb-4 text-xl">
-          <!-- rating -->
-          <div class="mb-1">
-            <i class="pi pi-star-fill"></i>
-            <span>{{ movie.vote_average }}</span>
-            <span>/10</span>
-          </div>
-          <!-- votes -->
-          <div class="mb-1">
-            <i class="pi pi-users"></i>
-            <span>{{ movie.vote_count }}</span>
-          </div>
-          <!-- release date -->
-          <div>
-            <i class="pi pi-calendar"></i>
-            <span>{{ movie.release_date | date: 'yyyy' }}</span>
+          <div class="absolute left-20 top-20 text-white">
+            <h2 class="text-4xl">{{ mediaItem.original_title || mediaItem.original_name }}</h2>
+            <div class="mb-4 text-xl">
+              <!-- rating -->
+              <div class="mb-1">
+                <i class="pi pi-star-fill"></i>
+                <span>{{ mediaItem.vote_average }}</span>
+                <span>/10</span>
+              </div>
+              <!-- votes -->
+              <div class="mb-1">
+                <i class="pi pi-users"></i>
+                <span>{{ mediaItem.vote_count }}</span>
+              </div>
+              <!-- release date or first air date -->
+              <div>
+                <i class="pi pi-calendar"></i>
+                <span>{{ mediaItem.release_date || mediaItem.first_air_date | date: 'yyyy' }}</span>
+              </div>
+            </div>
+            <!-- description -->
+            <div class="w-3/4 text-xl">{{ mediaItem.overview }}</div>
           </div>
         </div>
-        <!-- description -->
-        <div class="w-3/4 text-xl">{{ movie.overview }}</div>
-      </div>
-    </div>
-  </ng-container>
-</div>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>

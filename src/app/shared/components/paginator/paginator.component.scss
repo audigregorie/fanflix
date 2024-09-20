@@ -1,0 +1,28 @@
+// ::ng-deep .p-paginator .p-paginator-page {
+//   transition: opacity 0.3s ease;
+//   opacity: 1;
+//   /* Default opacity */
+// }
+
+// ::ng-deep .p-paginator .p-paginator-page:hover {
+//   opacity: 0.6;
+//   /* Lower opacity on hover */
+// }
+
+// ::ng-deep .p-paginator .p-paginator-page.p-highlight {
+//   opacity: 0.6;
+//   /* Lower opacity for the active page */
+// }
+
+.custom-paginator {
+  ::ng-deep {
+    .p-paginator-page {
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+
+      &.p-highlight {
+        opacity: 1;
+      }
+    }
+  }
+}
