@@ -10,7 +10,7 @@ Tools used:
 - TailwindCSS
 - PrimeNg
 
-Check out the live demo =>
+Check out the live demo => [FanFlix](https://audigregorie.github.io/fanflix/)
 
 \_ AY 2024
 
