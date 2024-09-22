@@ -1,5 +1,5 @@
 <ng-container *ngIf="media$ | async as media; else loadingTabView">
-  <!-- Brackets around media in order to  pass an object to a variable that is expecting an array -->
+  <!-- Brackets around media in order to pass an object to a variable that is expecting an array -->
   <app-slider [slides]="[media]" [isHeader]="true"></app-slider>
 
   <p-tabView>
@@ -13,7 +13,6 @@
           <h2 class="label mb-2">Overview</h2>
           <p class="mb-6">{{ media.overview }}</p>
 
-          <!-- Release date -->
           <div class="stat" *ngIf="media.release_date || media.first_air_date">
             <div class="label">Release Date</div>
             <div class="value">
@@ -21,31 +20,26 @@
             </div>
           </div>
 
-          <!-- Language -->
           <div class="stat" *ngIf="media.original_language">
             <div class="label">Language</div>
             <div class="value">{{ media.original_language }}</div>
           </div>
 
-          <!-- Revenue  -->
           <div class="stat" *ngIf="media.revenue">
             <div class="label">Revenue</div>
             <div class="value">{{ media.revenue | currency }}</div>
           </div>
 
-          <!-- Duration  -->
           <div class="stat" *ngIf="media.runtime">
             <div class="label">Duration</div>
             <div class="value">{{ media.runtime }} min</div>
           </div>
 
-          <!-- Status -->
           <div class="stat" *ngIf="media.status">
             <div class="label">Status</div>
             <div class="value">{{ media.status }}</div>
           </div>
 
-          <!-- Genres -->
           <div class="stat" *ngIf="media.genres">
             <div class="label">Genres</div>
             <div class="value">
@@ -59,14 +53,12 @@
       <ng-container *ngIf="mediaCast$ | async as actors">
         <div class="mx-4 md:mx-20">
           <h2 class="mt-12 text-3xl">Cast</h2>
-          <p-carousel [value]="actors" [numVisible]="5" [numScroll]="5" [circular]="false" [responsiveOptions]="responsiveOptions">
+          <p-carousel [value]="actors" [numVisible]="5" [numScroll]="5" [circular]="false"
+            [responsiveOptions]="responsiveOptions">
             <ng-template let-actor pTemplate="item">
               <div class="flex h-full flex-col gap-2 p-4">
-                <img
-                  *ngIf="actor.profile_path; else defaultActorPhoto"
-                  [src]="imagesSizes.medium + actor.profile_path"
-                  alt=""
-                  class="w-full rounded-lg object-cover md:max-w-sm" />
+                <img *ngIf="actor.profile_path; else defaultActorPhoto" [src]="imagesSizes.medium + actor.profile_path"
+                  alt="" class="w-full rounded-lg object-cover md:max-w-sm" />
                 <div class="flex flex-col items-center text-center">
                   <p class="text-sm font-semibold md:text-base">{{ actor.character }}</p>
                   <p class="text-xs text-gray-500 md:text-sm">{{ actor.name }}</p>
@@ -82,9 +74,9 @@
     <p-tabPanel header="Videos">
       <ng-container *ngIf="mediaVideos$ | async as mediaVideos; else loadingVideos">
         <div class="mx-4 mt-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:mx-20 md:grid-cols-2 2xl:grid-cols-3">
-          <div *ngFor="let mediaVideo of mediaVideos">
+          <ng-container *ngFor="let mediaVideo of mediaVideos">
             <app-video-embed [key]="mediaVideo.key"></app-video-embed>
-          </div>
+          </ng-container>
         </div>
       </ng-container>
     </p-tabPanel>
@@ -93,9 +85,10 @@
     <p-tabPanel header="Photos">
       <ng-container *ngIf="mediaImages$ | async as mediaImages; else loadingPhotos">
         <div class="mx-4 mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mx-20 md:grid-cols-3 2xl:grid-cols-4">
-          <div *ngFor="let mediaImage of mediaImages">
-            <p-image [src]="imagesSizes.large + mediaImage.file_path" [alt]="media.title || media.name" width="100%" [preview]="true"></p-image>
-          </div>
+          <ng-container *ngFor="let mediaImage of mediaImages">
+            <p-image [src]="imagesSizes.large + mediaImage.file_path" [alt]="media.title || media.name" width="100%"
+              [preview]="true"></p-image>
+          </ng-container>
         </div>
       </ng-container>
     </p-tabPanel>
