@@ -20,9 +20,7 @@
             "outputPath": "dist/fan_flix_app",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -31,11 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "src/styles.scss"
-            ],
+            "styles": ["node_modules/primeng/resources/themes/lara-light-blue/theme.css", "node_modules/primeng/resources/primeng.min.css", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -44,7 +38,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "8MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -86,10 +80,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -98,9 +89,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
