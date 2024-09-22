@@ -15,10 +15,10 @@ a {
   @apply cursor-pointer no-underline hover:opacity-80;
 }
 
-.debug {
-  @apply border border-red-500;
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
 }
 
-.container {
-  @apply mx-20;
+.debug {
+  @apply border border-red-500;
 }

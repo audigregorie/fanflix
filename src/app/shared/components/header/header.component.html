@@ -1,15 +1,39 @@
-<header class="flex h-[65px] items-center justify-between border-b-black">
-  <div>
-    <a routerLink="/">
-      <h1 class="ml-20 w-[120px] text-2xl text-[#f03c40]">FANFLIX</h1>
-    </a>
-  </div>
-  <div>
-    <ul class="mr-20 flex list-none gap-4">
+<header class="relative flex h-[65px] items-center justify-between border-b-black px-4 text-white">
+  <a routerLink="/">
+    <h1 class="w-[120px] text-2xl text-[#f03c40] md:ml-20">FANFLIX</h1>
+  </a>
+
+  <!-- Navigation links (desktop) -->
+  <div class="hidden md:mr-20 md:block">
+    <ul class="flex list-none gap-4">
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="list/movie">Movies</a></li>
       <li><a routerLink="list/tv">TV Shows</a></li>
       <li><a routerLink="genres">Genres</a></li>
+    </ul>
+  </div>
+
+  <!-- Hamburger menu (mobile) -->
+  <div class="md:mr-20 md:hidden">
+    <button (click)="toggleMenu()" class="focus:outline-none">
+      <i class="pi pi-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile menu  -->
+  <div
+    class="fixed inset-y-0 right-0 z-50 w-full transform bg-[#141414] p-4 shadow-lg transition-transform duration-300 ease-in-out"
+    [ngClass]="{ 'translate-x-full': !menuOpen, 'translate-x-0': menuOpen }">
+    <button (click)="toggleMenu()" class="focus:outline-none">
+      <i class="pi pi-times text-2xl text-white"></i>
+    </button>
+
+    <!-- Navigation links (mobile) -->
+    <ul class="mt-8 flex list-none flex-col gap-4 text-lg text-white">
+      <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="list/movie" (click)="closeMenu()">Movies</a></li>
+      <li><a routerLink="list/tv" (click)="closeMenu()">TV Shows</a></li>
+      <li><a routerLink="genres" (click)="closeMenu()">Genres</a></li>
     </ul>
   </div>
 </header>

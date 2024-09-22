@@ -38,11 +38,12 @@ export class MediaDetailComponent implements OnInit {
   public overviewSkeletonCount = Array(8).fill(0);
   public videoSkeletonCount = Array(6).fill(0);
   public photoSkeletonCount = Array(8).fill(0);
+  public responsiveOptions: any[] = [];
 
   private activeRoute = inject(ActivatedRoute);
   private mediaService = inject(MediaService);
 
-  constructor() {}
+  constructor() { }
 
   public ngOnInit(): void {
     this.activeRoute.params.subscribe((params) => {
@@ -55,5 +56,28 @@ export class MediaDetailComponent implements OnInit {
       this.mediaCast$ = this.mediaService.getMediaCast(this.mediaType, this.mediaId);
       this.mediaSimilarShows$ = this.mediaService.getSimilarMedia(this.mediaType, this.mediaId);
     });
+
+    this.responsiveOptions = [
+      {
+        breakpoint: '1280px',
+        numVisible: 4,
+        numScroll: 4,
+      },
+      {
+        breakpoint: '1024px',
+        numVisible: 4,
+        numScroll: 4,
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 3,
+        numScroll: 3,
+      },
+      {
+        breakpoint: '640px',
+        numVisible: 2,
+        numScroll: 2,
+      },
+    ];
   }
 }

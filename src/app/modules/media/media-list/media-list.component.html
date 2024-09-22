@@ -1,21 +1,17 @@
-<div class="container py-4">
-  <div class="mb-4 grid grid-cols-12">
-    <div>
-      <app-search (searchEmitter)="searchEmitted($event)"></app-search>
-    </div>
+<div class="mx-4 py-4 md:px-20">
+  <div class="grid grid-cols-12">
+    <app-search (searchEmitter)="searchEmitted($event)"></app-search>
   </div>
 
   <ng-container *ngIf="media$ | async as media; else loadingMediaItem">
-    <div class="mb-4 grid grid-cols-5 gap-4">
+    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       <div *ngFor="let mediaItem of media.results">
-        <app-media-item [mediaItem]="mediaItem" [mediaType]="mediaType"></app-media-item>
+        <app-media-item [mediaItem]="mediaItem" [mediaType]="mediaType" class="h-[425px] w-[325px]"></app-media-item>
       </div>
     </div>
 
-    <div class="grid grid-cols-1">
-      <div>
-        <p-paginator (onPageChange)="pageChanged($event)" [rows]="20" [totalRecords]="media.total_results"></p-paginator>
-      </div>
+    <div class="mt-4 grid grid-cols-1">
+      <p-paginator (onPageChange)="pageChanged($event)" [rows]="20" [totalRecords]="media.total_results"></p-paginator>
     </div>
   </ng-container>
 </div>

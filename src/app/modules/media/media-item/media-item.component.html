@@ -1,19 +1,18 @@
 <ng-container *ngIf="mediaItem">
-  <a [routerLink]="'/detail/' + mediaItem.id + '/' + mediaType" class="relative block h-[425px] rounded-md border border-[#999]">
-    <div class="absolute left-3 top-3 flex items-center rounded-md bg-black px-2 py-1">
-      <i class="pi pi-star"></i>
-      <span>{{ mediaItem.vote_average }}/10</span>
+  <a
+    [routerLink]="'/detail/' + mediaItem.id + '/' + mediaType"
+    class="relative flex flex-col overflow-hidden rounded-md border border-[#999] transition-transform hover:scale-105">
+    <div class="absolute left-3 top-3 flex items-center rounded-md bg-black bg-opacity-75 px-2 py-1 text-sm text-white">
+      <i class="pi pi-star mr-1"></i>
+      <span>{{ mediaItem.vote_average | number: '1.1-1' }}/10</span>
     </div>
-
-    <div class="h-[375px]">
-      <img
-        [src]="imagesBaseUrl + '/w500/' + mediaItem.poster_path"
-        [alt]="mediaItem.title || mediaItem.name"
-        class="h-[375px] w-full rounded-md object-cover" />
+    <div class="aspect-w-2 aspect-h-3 w-full">
+      <img [src]="imagesBaseUrl + '/w500/' + mediaItem.poster_path" [alt]="mediaItem.title || mediaItem.name" class="h-full w-full rounded-t-md object-cover" />
     </div>
-
-    <div class="flex h-12 items-center rounded-b-md rounded-r-md bg-black px-2 font-bold">
-      {{ mediaItem.original_title || mediaItem.original_name }}
+    <div class="flex h-12 items-center justify-center rounded-b-md bg-black bg-opacity-50 px-2 py-1">
+      <h2 class="truncate text-sm font-bold text-white">
+        {{ mediaItem.original_title || mediaItem.original_name }}
+      </h2>
     </div>
   </a>
 </ng-container>
