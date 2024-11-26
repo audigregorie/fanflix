@@ -1,18 +1,8 @@
 # FanFlixApp
 
----
-
-A web app to view upcoming, popular, and a list of movies and tv shows.
-
-Tools used:
-
-- Angular
-- TailwindCSS
-- PrimeNg
-
-Check out the live demo => [FanFlix](https://audigregorie.github.io/fanflix/)
-
-\_ AY 2024
+- **Description**: View upcoming and popular movies and tv series.
+- **Tools used**: Anglar, Tailwind CSS PrimeNG
+- **Live Demo**: [FanFlix](https://audigregorie.github.io/fanflix/)
 
 ---
 
